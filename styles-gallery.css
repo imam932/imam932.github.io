@@ -51,3 +51,22 @@ body {
     font-weight: bold;
     cursor: pointer;
 }
+
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 10px; /* Jarak antar gambar */
+}
+
+.image {
+    width: 100%;
+    height: auto; /* Pastikan gambar berskala */
+    border-radius: 8px; /* Menambahkan sudut membulat */
+    overflow: hidden; /* Menghindari bagian gambar keluar */
+}
+
+@media (max-width: 600px) {
+    .container {
+        grid-template-columns: 1fr; /* Satu kolom untuk layar kecil */
+    }
+}
