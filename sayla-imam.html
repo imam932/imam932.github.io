@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Undangan Pernikahan — Sayla & Imam</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- AOS for simple scroll animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --beige: #FDF8D4;
+      --gold: #D4AF37;
+      --black: #0b0b0b;
+      --muted: #555;
+      --container-width: 1040px;
+    }
+    html,body{
+      height:100%;
+      background: var(--beige);
+      font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      color: var(--black);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* Global utilities */
+    .gold { color: var(--gold) !important; }
+    .gold-border { border-color: var(--gold) !important; }
+
+    /* Header / Hero */
+    .hero{
+      min-height: 80vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      overflow:hidden;
+      background-color: #efeae0;
+    }
+    .hero .bg-photo{
+      position:absolute; inset:0; background-position:center; background-size:cover; filter:brightness(.45) contrast(.95);
+    }
+    .hero .hero-inner{
+      position:relative; z-index:2; text-align:center; color:var(--beige);
+      padding:4rem 1rem;
+      max-width:900px;
+    }
+    .couple-name{
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 5vw, 4.2rem);
+      letter-spacing: 1px;
+      font-weight:700;
+    }
+    .sub-heading{ font-size:1rem; color:var(--beige); margin-top:.5rem }
+
+    /* countdown */
+    .countdown .unit{ display:inline-block; min-width:70px; padding: .75rem; border-radius:8px; background: rgba(255,255,255,.06); border:1px solid rgba(0,0,0,.06); margin: .25rem; }
+    .countdown .value{ font-family: 'Playfair Display', serif; font-size:1.5rem; display:block }
+
+    /* Sections */
+    section{ padding:4rem 0; }
+    .section-dark{ background: linear-gradient(180deg, rgba(11,11,11,0.98), rgba(11,11,11,0.98)); color:#fff }
+    .frame-photo{ border-radius:24px; overflow:hidden; border:6px solid rgba(212,175,55,.06); box-shadow:0 12px 30px rgba(0,0,0,.25); }
+
+    /* Cards */
+    .info-card{ background:rgba(255,255,255,.03); border:1px solid rgba(212,175,55,.12); padding:1.25rem; border-radius:12px; }
+
+    /* Gallery */
+    .gallery img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+    /* RSVP */
+    .rsvp-card{ background:rgba(255,255,255,.02); border-radius:12px; padding:1.5rem; border:1px solid rgba(255,255,255,.06); }
+
+    /* Footer */
+    footer{ padding:2.5rem 0; text-align:center; }
+    .guest-name{ font-size:1.5rem; font-weight:600; color:var(--gold); margin-top:.25rem; }
+    .quote{ font-style:italic; font-size:0.8rem; color:var(--muted); text-align: center; padding: 0.5rem 1rem; }
+
+    @media (min-width:992px){
+      .hero{ min-height:84vh }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="bg-photo" style="background-image: url('assets/img/bg/sayla-imam.webp');"></div> <!-- Replace assets/hero.jpg with your hero image -->
+
+    <div class="hero-inner container text-center" data-aos="fade-up">
+      <div class="couple-name gold">Sayla &amp; Imam</div>
+
+      <div class="mt-4 countdown d-inline-block" aria-label="Countdown to wedding">
+        <div class="unit text-center me-2">
+          <span class="value" id="days">00</span>
+          <small>Hari</small>
+        </div>
+        <div class="unit text-center me-2">
+          <span class="value" id="hours">00</span>
+          <small>Jam</small>
+        </div>
+        <div class="unit text-center me-2">
+          <span class="value" id="minutes">00</span>
+          <small>Menit</small>
+        </div>
+        <div class="unit text-center">
+          <span class="value" id="seconds">00</span>
+          <small>Detik</small>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <!-- <a class="btn btn-outline-dark gold-border" href="#rsvp">RSVP</a> -->
+        <p class="sub-heading">Kepada yth :</p>
+        <p class="sub-heading">Bapak/Ibu/Saudara/i</p>
+        <h4 id="guest-name" class="guest-name"></h4>
+        <script>
+          // Get guest name from URL parameter ?to=
+          function getGuestName() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('to') || 'Tamu Undangan';
+          }
+          document.getElementById('guest-name').textContent = getGuestName();
+        </script>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+    <!-- ABOUT -->
+    <section class="container" data-aos="fade-up">
+      <div class="row align-items-center gy-4">
+        <div class="col-md-5 text-center">
+          <div class="frame-photo" style="max-width:380px;margin:0 auto;">
+            <img src="assets/img/bg/couple.webp" alt="Sayla & Imam" style="width:100%;display:block;">
+          </div>
+        </div>
+        <div class="col-md-7">
+          <!-- <h3 class="mb-3" style="font-family: 'Playfair Display', serif;">Our Story</h3> -->
+          <p class="quote">Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berfikir. (Qs Ar-Rum: 21)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EVENT -->
+    <section class="section-dark" data-aos="fade-up">
+      <div class="container">
+        <div class="row g-4 text-center">
+          <div class="col-md-6" data-aos="fade-right">
+            <div class="p-4 info-card text-white">
+              <img src="assets/img/sayla.webp" alt="Mempelai Wanita" class="frame-photo mb-3" style="width:220px;height:220px;object-fit:cover;">
+              <h5 class="gold">Usaylatul Attiqoh</h5>
+              <p class="mb-1">Putri Pertama dari Bapak Samsul Arif & Ibu Idatul Fitriyah</p>
+              <p class="mb-1">IG: @usaylatulattiqoh</p>
+            </div>
+              </div>
+              <div class="col-md-6" data-aos="fade-left">
+            <div class="p-4 info-card text-white">
+              <img src="assets/img/imam.webp" alt="Mempelai Pria" class="frame-photo mb-3" style="width:220px;height:220px;object-fit:cover;">
+              <h5 class="gold">Imam Nawawi</h5>
+              <p class="mb-1">Putra Tunggal dari Bapak Tu'in Agus Priyanto & Ibu Siti Kholifah</p>
+              <p class="mb-1">IG: @imamp.programmer</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section data-aos="fade-up">
+      <div class="container">
+        <div class="row justify-content-center text-center mb-4">
+          <div class="col-lg-8">
+            <h2 style="font-family:'Playfair Display', serif;">Pelaksanaan</h2>
+            <p class="text-muted">Bergabunglah dengan kami untuk akad yang khidmat dan resepsi yang penuh suka cita.</p>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-6" data-aos="fade-right">
+            <div class="p-4 info-card">
+              <h5 class="gold">Akad Nikah</h5>
+              <p class="mb-1">16 November 2025, 10:00 WIB - 12:00 WIB</p>
+              <p class="mb-1">Jl. Argopuro No.45, Satrean, Rambigundam, Kec. Rambipuji, Kabupaten Jember, Jawa Timur 68152.</p>
+              <a class="btn btn-sm mt-3" href="#map">Lihat Map</a>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-left">
+            <div class="p-4 info-card">
+              <h5 class="gold">Resepsi</h5>
+              <p class="mb-1">16 November 2025, 12:00 - 16:00 WIB</p>
+              <p class="mb-1">Jl. Argopuro No.45, Satrean, Rambigundam, Kec. Rambipuji, Kabupaten Jember, Jawa Timur 68152.</p>
+              <a class="btn btn-sm mt-3" href="#map">Lihat Map</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALLERY -->
+    <section class="container section-dark" data-aos="fade-up">
+      <div class="row">
+        <div class="col-12 text-center mb-4">
+          <h3 style="font-family:'Playfair Display', serif;">Moment Gallery</h3>
+        </div>
+      </div>
+
+      <div class="row g-3 gallery">
+        <!-- Replace these images with real prewedding images -->
+        <div class="col-6 col-md-3"><img src="assets/img/car-1.webp" alt="" class="rounded"></div>
+        <div class="col-6 col-md-3"><img src="assets/img/ous-1.webp" alt="" class="rounded"></div>
+        <div class="col-6 col-md-3"><img src="assets/img/car-2.webp" alt="" class="rounded"></div>
+        <div class="col-6 col-md-3"><img src="assets/img/ous-2.webp" alt="" class="rounded"></div>
+      </div>
+    </section>
+
+    <!-- RSVP -->
+    <section id="rsvp" data-aos="fade-up">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-6">
+            <div class="rsvp-card text-white">
+              <h4 class="mb-3 gold">RSVP</h4>
+              <p class="text-muted">Please let us know if you will join our celebration.</p>
+
+              <form id="rsvpForm" class="mt-3" onsubmit="return handleRSVP(event)">
+                <div class="mb-3">
+                  <label class="form-label">Your Name</label>
+                  <input type="text" class="form-control" id="rsvpName" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Number of Guests</label>
+                  <input type="number" class="form-control" id="rsvpGuests" min="0" value="1" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Will you attend?</label>
+                  <select class="form-select" id="rsvpAttending" required>
+                    <option value="">-- Select --</option>
+                    <option value="yes">Yes, will attend</option>
+                    <option value="no">No, sorry</option>
+                  </select>
+                </div>
+                <div class="d-grid">
+                  <button type="submit" class="btn btn-light btn-lg">Send RSVP</button>
+                </div>
+
+                <div id="rsvpMessage" class="mt-3" style="display:none;"></div>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gift / Transfer Info -->
+        <div class="row justify-content-center mt-4">
+          <div class="col-lg-8 text-center text-white">
+            <h5 class="gold">Gifts</h5>
+            <p class="text-muted">If you wish to give a gift, you may send it to:</p>
+            <p class="mb-0">Bank ABC — 1234 5678 9012 <strong class="gold">(Sayla &amp; Imam)</strong></p>
+            <small class="text-muted">Or scan the QR code at the venue.</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAP / LOCATION (simple placeholder) -->
+    <section id="map" class="container section-dark" data-aos="fade-up">
+      <div class="row">
+        <div class="col-12 text-center mb-3">
+          <h4 style="font-family:'Playfair Display', serif;">Location</h4>
+          <p class="text-muted">Find the venues here</p>
+        </div>
+        <div class="col-12">
+          <!-- Embed map here. Replace with actual map iframe -->
+          <div class="ratio ratio-16x9 frame-photo overflow-hidden">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d246.814082961677!2d113.61427743713226!3d-8.200202547124217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2dd6919b7da26499%3A0x703b64268e097849!2sJl.%20Argopuro%20No.45%2C%20Satrean%2C%20Rambigundam%2C%20Kec.%20Rambipuji%2C%20Kabupaten%20Jember%2C%20Jawa%20Timur%2068152!5e0!3m2!1sid!2sid!4v1759331411818!5m2!1sid!2sid" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIAL / THANK YOU -->
+    <section class="section-dark" data-aos="fade-up">
+      <div class="container text-center">
+        <h3 class="gold" style="font-family:'Playfair Display', serif;">We Found Love</h3>
+        <p class="text-muted">Thank you for being part of our story. Your prayers and presence mean the world to us.</p>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="container">
+      <p class="small text-center">&copy; 2025 Sayla &amp; Imam. Designed with ❤️ — Replace images in assets/ folder.</p>
+    </footer>
+
+  </main>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration:700, once:true });
+
+    // Countdown target date (update as needed)
+    const weddingDate = new Date('2025-11-16T10:00:00');
+
+    function updateCountdown(){
+      const now = new Date();
+      const diff = weddingDate - now;
+      if(diff <= 0){
+        document.getElementById('days').textContent = '00';
+        document.getElementById('hours').textContent = '00';
+        document.getElementById('minutes').textContent = '00';
+        document.getElementById('seconds').textContent = '00';
+        return;
+      }
+      const sec = Math.floor((diff/1000) % 60);
+      const min = Math.floor((diff/1000/60) % 60);
+      const hrs = Math.floor((diff/1000/60/60) % 24);
+      const days = Math.floor(diff/1000/60/60/24);
+      document.getElementById('days').textContent = String(days).padStart(2,'0');
+      document.getElementById('hours').textContent = String(hrs).padStart(2,'0');
+      document.getElementById('minutes').textContent = String(min).padStart(2,'0');
+      document.getElementById('seconds').textContent = String(sec).padStart(2,'0');
+    }
+    updateCountdown(); setInterval(updateCountdown,1000);
+
+    // Simple RSVP handler (replace with actual endpoint integration)
+    function handleRSVP(e){
+      e.preventDefault();
+      const name = document.getElementById('rsvpName').value.trim();
+      const guests = document.getElementById('rsvpGuests').value;
+      const attending = document.getElementById('rsvpAttending').value;
+      const msg = document.getElementById('rsvpMessage');
+
+      // Simple UI feedback
+      msg.style.display = 'block';
+      if(!name || !attending){
+        msg.textContent = 'Please complete the form.';
+        msg.className = 'text-danger';
+        return false;
+      }
+
+      msg.className = 'text-success';
+      msg.textContent = `Thanks ${name}! Your RSVP has been received.`;
+
+      // TODO: send to server via fetch POST
+      // fetch('/api/rsvp', { method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({ name, guests, attending }) })
+
+      // reset form
+      e.target.reset();
+      return false;
+    }
+  </script>
+</body>
+</html>
