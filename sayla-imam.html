@@ -53,11 +53,12 @@
       max-width:900px;
     }
     .couple-name{
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2rem, 5vw, 4.2rem);
+      font-family: 'Trajan Pro', serif;
+      font-size: clamp(2.5rem, 5vw, 4.2rem);
       letter-spacing: 1px;
       font-weight:700;
     }
+    .mempelai{ font-size:1.25rem; font-weight:600; color:var(--gold); font-family: 'Trajan Pro', serif;}
     .sub-heading{ font-size:1rem; color:var(--beige); margin-top:.5rem }
 
     /* countdown */
@@ -69,7 +70,8 @@
     .section-light{ background: var(--beige); color:var(--black) }
     .section-dark{ background: var(--beige-dark); color:#fff }
     .section-dark-linear{ background: linear-gradient(180deg, var(--beige-dark), var(--beige)); color:#fff }
-    .frame-photo{ border-radius:24px; overflow:hidden; border:6px solid rgba(212,175,55,.06); box-shadow:0 12px 30px rgba(0,0,0,.25); }
+    .section-dark-linear-revert{ background: linear-gradient(180deg, var(--beige), var(--beige-dark)); color:#fff }
+    .frame-photo{ border-radius:24px; overflow:hidden; border:3px solid rgba(212,175,55,.06); box-shadow:0 12px 30px rgba(0,0,0,.25); }
 
     /* Cards */
     .info-card{ background:rgba(255,255,255,.03); border:1px solid rgba(212,175,55,.12); padding:1.25rem; border-radius:12px; }
@@ -84,6 +86,7 @@
     footer{ padding:2.5rem 0; text-align:center; }
     .guest-name{ font-size:1.5rem; font-weight:600; color:var(--gold); margin-top:.25rem; }
     .quote{ font-style:italic; font-size:0.8rem; color:var(--muted); text-align: center; padding: 0.5rem 1rem; }
+    .btn-dark{ background: var(--beige-dark); color:var(--beige); border:none; }
 
     @media (min-width:992px){
       .hero{ min-height:84vh }
@@ -91,13 +94,15 @@
   </style>
 </head>
 <body>
+  <!-- Background Music -->
+  <audio id="bg-music" src="./public/assets/music/NOH-SALLEH-RAHSIA-TUHAN-CUT.mp3" autoplay loop hidden></audio>
 
   <!-- HERO -->
   <header class="hero">
     <div class="bg-photo" style="background-image: url('assets/img/bg/sayla-imam.webp');"></div> <!-- Replace assets/hero.jpg with your hero image -->
 
-    <div class="hero-inner container text-center" data-aos="fade-up">
-      <div class="couple-name gold">Sayla &amp; Imam</div>
+    <div class="hero-inner container text-center" data-aos="fade-up"></div>
+      <div class="couple-name gold">SAYLA &amp; IMAM</div>
 
       <div class="mt-4 countdown d-inline-block" aria-label="Countdown to wedding">
         <div class="unit text-center me-2">
@@ -142,7 +147,7 @@
       <div class="row align-items-center gy-4">
         <div class="col-md-5 text-center">
           <div class="frame-photo" style="max-width:380px;margin:0 auto;">
-            <img src="assets/img/bg/couple.webp" alt="Sayla & Imam" style="width:100%;display:block;">
+            <img src="assets/img/bg/formal.webp" alt="Sayla & Imam" style="width:100%;display:block;">
           </div>
         </div>
         <div class="col-md-7">
@@ -161,7 +166,7 @@
               <img src="assets/img/sayla.webp" alt="Mempelai Wanita" class="frame-photo mb-3" style="width:220px;height:220px;object-fit:cover;">
               <h5 class="text-muted mempelai">Usaylatul Attiqoh</h5>
               <p class="mb-1 text-muted">Putri Pertama dari Bapak Samsul Arif & Ibu Idatul Fitriyah</p>
-              <p class="mb-1 text-muted">IG: @usaylatulattiqoh</p>
+              <a href="https://www.instagram.com/saylaslife/" target="_blank" class="btn btn-sm btn-light">@Instagram</a>
             </div>
               </div>
               <div class="col-md-6" data-aos="fade-left">
@@ -169,13 +174,13 @@
               <img src="assets/img/imam.webp" alt="Mempelai Pria" class="frame-photo mb-3" style="width:220px;height:220px;object-fit:cover;">
               <h5 class="text-muted mempelai">Imam Nawawi</h5>
               <p class="mb-1 text-muted">Putra Tunggal dari Bapak Tu'in Agus Priyanto & Ibu Siti Kholifah</p>
-              <p class="mb-1 text-muted">IG: @imamp.programmer</p>
+              <a href="https://www.instagram.com/imam.programmer/" target="_blank" class="btn btn-sm btn-light">@Instagram</a>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <section data-aos="fade-up" class="section-light">
+    <section data-aos="fade-up" class="section-light text-center">
       <div class="container">
         <div class="row justify-content-center text-center mb-4">
           <div class="col-lg-8">
@@ -186,19 +191,24 @@
 
         <div class="row g-4">
           <div class="col-md-6" data-aos="fade-right">
-            <div class="p-4 info-card">
+            <div class="p-2 info-card">
               <h5 class="gold">Akad Nikah</h5>
-              <p class="mb-1">16 November 2025, 10:00 WIB - 12:00 WIB</p>
-              <p class="mb-1">Jl. Argopuro No.45, Satrean, Rambigundam, Kec. Rambipuji, Kabupaten Jember, Jawa Timur 68152.</p>
-              <a class="btn btn-sm mt-3" href="#map">Lihat Map</a>
+              <p class="mb-1">16 November 2025</p>
+              <p class="mb-1">10:00 WIB - 12:00 WIB</p>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-left">
+            <div class="p-2 info-card">
+              <h5 class="gold">Resepsi</h5>
+              <p class="mb-1">16 November 2025</p>
+              <p class="mb-1">12:00 - Selesai</p>
             </div>
           </div>
           <div class="col-md-6" data-aos="fade-left">
             <div class="p-4 info-card">
-              <h5 class="gold">Resepsi</h5>
-              <p class="mb-1">16 November 2025, 12:00 - 16:00 WIB</p>
+              <h5 class="gold">Pelaksanaan acara di kediaman mempelai wanita</h5>
               <p class="mb-1">Jl. Argopuro No.45, Satrean, Rambigundam, Kec. Rambipuji, Kabupaten Jember, Jawa Timur 68152.</p>
-              <a class="btn btn-sm mt-3" href="#map">Lihat Map</a>
+              <a class="btn btn-sm btn-dark mt-3" href="#map">Lihat Map</a>
             </div>
           </div>
         </div>
@@ -223,7 +233,7 @@
     </section>
 
     <!-- RSVP -->
-    <section id="rsvp" data-aos="fade-up">
+    <section id="rsvp" data-aos="fade-up" class="section-dark-linear-revert">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-6">
@@ -261,10 +271,29 @@
         <!-- Gift / Transfer Info -->
         <div class="row justify-content-center mt-4">
           <div class="col-lg-8 text-center text-white">
-            <h5 class="gold">Gifts</h5>
-            <p class="text-muted">If you wish to give a gift, you may send it to:</p>
-            <p class="mb-0">Bank ABC — 1234 5678 9012 <strong class="gold">(Sayla &amp; Imam)</strong></p>
-            <small class="text-muted">Or scan the QR code at the venue.</small>
+            <h5 class="text-white">Gifts</h5>
+            <p class="text-muted">Doa restu Anda merupakan karunia yang sangat berarti bagi kami, dan jika 
+              memberi adalah ungkapan tanda kasih Anda, Anda dapat memberi dalam bentuk cashless:</p>
+              <div class="mb-3">
+                <p class="mb-0 d-inline">Bank BCA — <span id="rekening">0240748690</span></p><br>
+                <strong>(Usaylatul Attiqoh)</strong>
+                <br>
+                <button type="button" class="btn btn-sm btn-light ms-2" onclick="copyRekening('rekening')">Salin Rekening</button>
+              </div>
+              <div>
+                <p class="mb-0 d-inline">Gopay — <span id="rekeningGopay">082335946542</span></p><br>
+                <strong>(Usaylatul Attiqoh)</strong>
+                <br>
+                <button type="button" class="btn btn-sm btn-light ms-2" onclick="copyRekening('rekeningGopay')">Salin Nomor</button>
+              </div>
+            <script>
+              function copyRekening(id) {
+                const rekening = document.getElementById(id).textContent;
+                navigator.clipboard.writeText(rekening).then(function() {
+                  alert('Nomor rekening berhasil disalin!');
+              });
+              }
+            </script>
           </div>
         </div>
       </div>
@@ -274,8 +303,8 @@
     <section id="map" class="container section-dark" data-aos="fade-up">
       <div class="row">
         <div class="col-12 text-center mb-3">
-          <h4 style="font-family:'Playfair Display', serif;">Location</h4>
-          <p class="text-muted">Find the venues here</p>
+          <h4 style="font-family:'Playfair Display', serif;">Lokasi Acara</h4>
+          <p class="text-muted">Temukan lokasi acara di sini</p>
         </div>
         <div class="col-12">
           <!-- Embed map here. Replace with actual map iframe -->
@@ -289,14 +318,13 @@
     <!-- TESTIMONIAL / THANK YOU -->
     <section class="section-dark" data-aos="fade-up">
       <div class="container text-center">
-        <h3 class="gold" style="font-family:'Playfair Display', serif;">We Found Love</h3>
-        <p class="text-muted">Thank you for being part of our story. Your prayers and presence mean the world to us.</p>
+        <p class="text-white">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabika Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kedua mempelai.</p>
       </div>
     </section>
 
     <!-- FOOTER -->
     <footer class="container">
-      <p class="small text-center">&copy; 2025 Sayla &amp; Imam. Designed with ❤️ — Replace images in assets/ folder.</p>
+      <p class="small text-center">&copy; 2025 Sayla &amp; Imam. Designed with ❤️ <br> <a href="https://imam932.github.io/">Imam Programmer</a></p>
     </footer>
 
   </main>
