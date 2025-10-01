@@ -14,7 +14,8 @@
 
   <style>
     :root{
-      --beige: #FDF8D4;
+      --beige: #faf0e6;
+      --beige-dark: #cda784;
       --gold: #D4AF37;
       --black: #0b0b0b;
       --muted: #555;
@@ -65,7 +66,9 @@
 
     /* Sections */
     section{ padding:4rem 0; }
-    .section-dark{ background: linear-gradient(180deg, rgba(11,11,11,0.98), rgba(11,11,11,0.98)); color:#fff }
+    .section-light{ background: var(--beige); color:var(--black) }
+    .section-dark{ background: var(--beige-dark); color:#fff }
+    .section-dark-linear{ background: linear-gradient(180deg, var(--beige-dark), var(--beige)); color:#fff }
     .frame-photo{ border-radius:24px; overflow:hidden; border:6px solid rgba(212,175,55,.06); box-shadow:0 12px 30px rgba(0,0,0,.25); }
 
     /* Cards */
@@ -135,7 +138,7 @@
 
   <main>
     <!-- ABOUT -->
-    <section class="container" data-aos="fade-up">
+    <section class="container section-light" data-aos="fade-up">
       <div class="row align-items-center gy-4">
         <div class="col-md-5 text-center">
           <div class="frame-photo" style="max-width:380px;margin:0 auto;">
@@ -156,23 +159,23 @@
           <div class="col-md-6" data-aos="fade-right">
             <div class="p-4 info-card text-white">
               <img src="assets/img/sayla.webp" alt="Mempelai Wanita" class="frame-photo mb-3" style="width:220px;height:220px;object-fit:cover;">
-              <h5 class="gold">Usaylatul Attiqoh</h5>
-              <p class="mb-1">Putri Pertama dari Bapak Samsul Arif & Ibu Idatul Fitriyah</p>
-              <p class="mb-1">IG: @usaylatulattiqoh</p>
+              <h5 class="text-muted mempelai">Usaylatul Attiqoh</h5>
+              <p class="mb-1 text-muted">Putri Pertama dari Bapak Samsul Arif & Ibu Idatul Fitriyah</p>
+              <p class="mb-1 text-muted">IG: @usaylatulattiqoh</p>
             </div>
               </div>
               <div class="col-md-6" data-aos="fade-left">
             <div class="p-4 info-card text-white">
               <img src="assets/img/imam.webp" alt="Mempelai Pria" class="frame-photo mb-3" style="width:220px;height:220px;object-fit:cover;">
-              <h5 class="gold">Imam Nawawi</h5>
-              <p class="mb-1">Putra Tunggal dari Bapak Tu'in Agus Priyanto & Ibu Siti Kholifah</p>
-              <p class="mb-1">IG: @imamp.programmer</p>
+              <h5 class="text-muted mempelai">Imam Nawawi</h5>
+              <p class="mb-1 text-muted">Putra Tunggal dari Bapak Tu'in Agus Priyanto & Ibu Siti Kholifah</p>
+              <p class="mb-1 text-muted">IG: @imamp.programmer</p>
             </div>
           </div>
         </div>
       </div>
     </section>
-    <section data-aos="fade-up">
+    <section data-aos="fade-up" class="section-light">
       <div class="container">
         <div class="row justify-content-center text-center mb-4">
           <div class="col-lg-8">
@@ -203,7 +206,7 @@
     </section>
 
     <!-- GALLERY -->
-    <section class="container section-dark" data-aos="fade-up">
+    <section class="container section-dark-linear" data-aos="fade-up">
       <div class="row">
         <div class="col-12 text-center mb-4">
           <h3 style="font-family:'Playfair Display', serif;">Moment Gallery</h3>
