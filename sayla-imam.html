@@ -94,7 +94,16 @@
   </style>
 </head>
 <body>
- <audio autoplay loop muted src="public/assets/music/NOH-SALLEH-RAHSIA-TUHAN-CUT.mp3"></audio>
+<script>
+  window.addEventListener('DOMContentLoaded', function() {
+    var audio = document.createElement('audio');
+    audio.src = 'assets/music/NOH-SALLEH-RAHSIA-TUHAN-CUT.mp3';
+    audio.autoplay = true;
+    audio.loop = true;
+    audio.style.display = 'none';
+    document.body.appendChild(audio);
+  });
+</script>
   <!-- HERO -->
   <header class="hero">
     <div class="bg-photo" style="background-image: url('assets/img/bg/sayla-imam.webp');"></div> <!-- Replace assets/hero.jpg with your hero image -->
