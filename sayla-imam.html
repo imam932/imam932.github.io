@@ -246,27 +246,24 @@
           <div class="col-lg-6">
             <div class="rsvp-card text-white">
               <h4 class="mb-3 gold">RSVP</h4>
-              <p class="text-muted">Please let us know if you will join our celebration.</p>
 
               <form id="rsvpForm" class="mt-3" onsubmit="return handleRSVP(event)">
                 <div class="mb-3">
-                  <label class="form-label">Your Name</label>
-                  <input type="text" class="form-control" id="rsvpName" required>
+                  <input type="text" class="form-control" id="rsvpName" placeholder="Nama Anda" required>
                 </div>
                 <div class="mb-3">
-                  <label class="form-label">Number of Guests</label>
-                  <input type="number" class="form-control" id="rsvpGuests" min="0" value="1" required>
+                  <textarea name="rsvpMessage" id="rsvpMessageInput" class="form-control" rows="3" placeholder="Ucapan Anda"></textarea>
                 </div>
                 <div class="mb-3">
-                  <label class="form-label">Will you attend?</label>
                   <select class="form-select" id="rsvpAttending" required>
-                    <option value="">-- Select --</option>
-                    <option value="yes">Yes, will attend</option>
-                    <option value="no">No, sorry</option>
+                    <option value="">-- Konfirmasi Kehadiran --</option>
+                    <option value="yes">Ya, akan hadir</option>
+                    <option value="no">Tidak, maaf</option>
+                    <option value="maybe">Masih Ragu</option>
                   </select>
                 </div>
                 <div class="d-grid">
-                  <button type="submit" class="btn btn-light btn-lg">Send RSVP</button>
+                  <button type="submit" class="btn btn-light btn-lg">Kirim RSVP</button>
                 </div>
 
                 <div id="rsvpMessage" class="mt-3" style="display:none;"></div>
@@ -370,23 +367,38 @@
     function handleRSVP(e){
       e.preventDefault();
       const name = document.getElementById('rsvpName').value.trim();
-      const guests = document.getElementById('rsvpGuests').value;
+      const message = document.getElementById('rsvpMessageInput').value;
       const attending = document.getElementById('rsvpAttending').value;
       const msg = document.getElementById('rsvpMessage');
 
       // Simple UI feedback
       msg.style.display = 'block';
       if(!name || !attending){
-        msg.textContent = 'Please complete the form.';
+        msg.textContent = 'Tolong lengkapi formulir.';
         msg.className = 'text-danger';
         return false;
       }
 
       msg.className = 'text-success';
-      msg.textContent = `Thanks ${name}! Your RSVP has been received.`;
+      msg.textContent = `Terima kasih ${name}! RSVP Anda telah diterima.`;
 
       // TODO: send to server via fetch POST
-      // fetch('/api/rsvp', { method:'POST', headers:{'content-type':'application/json'}, body:JSON.stringify({ name, guests, attending }) })
+      // RSVP hanya bisa disimpan ke file JSON di backend/server.
+      // Di sisi frontend (HTML/JS), Anda hanya bisa mengirim data ke backend API.
+      // Contoh fetch POST ke backend yang menyimpan ke file JSON:
+      fetch('./rsvp.json', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, message, attending })
+      })
+      .then(res => res.json())
+      .then(data => {
+        // Optional: tampilkan pesan sukses dari server
+      })  
+      .catch(err => {
+        msg.textContent = 'Gagal menyimpan RSVP.';
+        msg.className = 'text-danger';
+      });
 
       // reset form
       e.target.reset();
