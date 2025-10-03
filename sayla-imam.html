@@ -98,10 +98,24 @@
   window.addEventListener('DOMContentLoaded', function() {
     var audio = document.createElement('audio');
     audio.src = 'assets/music/NOH-SALLEH-RAHSIA-TUHAN-CUT.mp3';
-    audio.autoplay = true;
     audio.loop = true;
     audio.style.display = 'none';
     document.body.appendChild(audio);
+
+    // Create play button for user gesture
+    var playBtn = document.createElement('button');
+    playBtn.textContent = 'Putar Musik';
+    playBtn.className = 'btn btn-outline-dark gold-border text-white mb-3';
+    playBtn.style.position = 'fixed';
+    playBtn.style.bottom = '24px';
+    playBtn.style.right = '24px';
+    playBtn.style.zIndex = '9999';
+    document.body.appendChild(playBtn);
+
+    playBtn.addEventListener('click', function() {
+      audio.play();
+      playBtn.style.display = 'none';
+    });
   });
 </script>
   <!-- HERO -->
@@ -173,7 +187,7 @@
               <img src="assets/img/sayla.webp" alt="Mempelai Wanita" class="frame-photo mb-3" style="width:220px;height:220px;object-fit:cover;">
               <h5 class="text-muted mempelai">Usaylatul Attiqoh</h5>
               <p class="mb-1 text-muted">Putri Pertama dari Bapak Samsul Arif & Ibu Idatul Fitriyah</p>
-              <a href="https://www.instagram.com/saylaslife/" target="_blank" class="btn btn-sm btn-light">@Instagram</a>
+              <a href="https://www.instagram.com/saylaslife/" target="_blank" class="btn btn-sm btn-light">@saylaslife</a>
             </div>
               </div>
               <div class="col-md-6" data-aos="fade-left">
@@ -181,7 +195,7 @@
               <img src="assets/img/imam.webp" alt="Mempelai Pria" class="frame-photo mb-3" style="width:220px;height:220px;object-fit:cover;">
               <h5 class="text-muted mempelai">Imam Nawawi</h5>
               <p class="mb-1 text-muted">Putra Tunggal dari Bapak Tu'in Agus Priyanto & Ibu Siti Kholifah</p>
-              <a href="https://www.instagram.com/imam.programmer/" target="_blank" class="btn btn-sm btn-light">@Instagram</a>
+              <a href="https://www.instagram.com/imam.programmer/" target="_blank" class="btn btn-sm btn-light">@imam.programmer</a>
             </div>
           </div>
         </div>
