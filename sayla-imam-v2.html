@@ -171,7 +171,7 @@
               <img src="assets/img/imam.webp" alt="Mempelai Pria" class="frame-photo mb-3" style="width:220px;height:220px;object-fit:cover;">
               <h5 class="text-muted mempelai">Imam Nawawi</h5>
               <p class="mb-1 text-muted">Putra Tunggal dari Bapak Tu'in Agus Priyanto & Ibu Siti Kholifah</p>
-              <a href="https://www.instagram.com/imam.programmer/" target="_blank" class="btn btn-sm btn-light">@imam.programmer</a>
+              <a href="https://www.instagram.com/imam.programmer/" target="_blank" class="btn btn-sm btn-light">@imam</a>
             </div>
           </div>
         </div>
@@ -230,7 +230,7 @@
     </section>
 
     <!-- RSVP -->
-    <section id="rsvp" data-aos="fade-up" class="section-dark-linear-revert">
+    <section id="rsvp" data-aos="fade-up" class="section-dark">
       <div class="container">
         <div class="row justify-content-center d-none">
           <div class="col-lg-6">
@@ -265,20 +265,28 @@
         <!-- Gift / Transfer Info -->
         <div class="row justify-content-center mt-4">
           <div class="col-lg-8 text-center text-white">
+            <button type="button" class="btn btn-light btn-lg" onclick="document.getElementById('giftInfo').classList.remove('d-none'); this.style.display='none';">Mau Kirim Hadiah?</button>
+          </div>
+          <div id="giftInfo" class="col-lg-8 text-center text-white d-none mt-4">
             <h5 class="text-white">Gifts</h5>
-            <p class="text-muted">Doa restu Anda merupakan karunia yang sangat berarti bagi kami, dan jika 
-              memberi adalah ungkapan tanda kasih Anda, Anda dapat memberi dalam bentuk cashless:</p>
+            <p class="text-muted">Doa restu Anda merupakan karunia yang sangat berarti bagi kami:</p>
               <div class="mb-3">
                 <p class="mb-0 d-inline">Bank BCA — <span id="rekening">0240748690</span></p><br>
                 <strong>(Usaylatul Attiqoh)</strong>
                 <br>
-                <button type="button" class="btn btn-sm btn-light ms-2" onclick="copyRekening('rekening')">Salin Rekening</button>
+                <button type="button" class="btn btn-sm btn-light ms-2" onclick="copyRekening('rekening')">Salin</button>
               </div>
-              <div>
+              <div class="mb-3">
+                <p class="mb-0 d-inline">Bank Mandiri — <span id="rekeningMandiri">1440027282752</span></p><br>
+                <strong>(Usaylatul Attiqoh)</strong>
+                <br>
+                <button type="button" class="btn btn-sm btn-light ms-2" onclick="copyRekening('rekeningMandiri')">Salin</button>
+              </div>
+              <div class="mb-3">
                 <p class="mb-0 d-inline">Gopay — <span id="rekeningGopay">082335946542</span></p><br>
                 <strong>(Usaylatul Attiqoh)</strong>
                 <br>
-                <button type="button" class="btn btn-sm btn-light ms-2" onclick="copyRekening('rekeningGopay')">Salin Nomor</button>
+                <button type="button" class="btn btn-sm btn-light ms-2" onclick="copyRekening('rekeningGopay')">Salin</button>
               </div>
             <script>
               function copyRekening(id) {
@@ -294,7 +302,7 @@
     </section>
 
     <!-- MAP / LOCATION (simple placeholder) -->
-    <section id="map" class="container section-dark" data-aos="fade-up">
+    <section id="map" class="container section-dark-linear" data-aos="fade-up">
       <div class="row">
         <div class="col-12 text-center mb-3">
           <h4 style="font-family:'Playfair Display', serif;">Lokasi Acara</h4>
