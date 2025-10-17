@@ -84,8 +84,9 @@
     .gallery img{ width:100%; height:100%; object-fit:cover; display:block; }
 
     /* RSVP */
-    .rsvp-card{ background:rgba(255,255,255,.02); border-radius:12px; padding:1.5rem; border:1px solid rgba(255,255,255,.06); }
-
+    .rsvp-card{ background:var(--beige); border-radius:12px; padding:1.5rem; border:2px solid rgba(255,255,255,.06); }
+    .rsvp-item{ margin-bottom:1rem; background:var(--beige-dark) !important; border-radius: 12px; }
+    .text-time{ font-size:0.55rem; color:var(--beige); }
     /* Footer */
     footer{ padding:2.5rem 0; text-align:center; }
     .guest-name{ font-size:1.5rem; font-weight:600; color:var(--gold); margin-top:.25rem; }
@@ -237,36 +238,34 @@
     <!-- RSVP -->
     <section id="rsvp" data-aos="fade-up" class="section-dark">
       <div class="container">
-        <div class="row justify-content-center d-none">
+        <div class="row justify-content-center">
           <div class="col-lg-6">
-            <div class="rsvp-card text-white">
-              <h4 class="mb-3 gold">RSVP</h4>
+            <div class="text-white">
+              <h4 class="mb-3 text-beige text-center">Wish for the couple</h4>
 
-              <form id="rsvpForm" class="mt-3" onsubmit="return handleRSVP(event)">
+                <div id="messagesContainer" class="mt-3"></div>
+                  <div id="messagesList" class="list-group mb-2 rsvp-card" style="max-height:400px; overflow:auto;">
+                    <div class="text-beige-dark">Memuat...</div>
+                  </div>
+                </div>
+
+              <form id="rsvpForm" class="mt-4" onsubmit="return handleRSVP(event)">
                 <div class="mb-3">
-                  <input type="text" class="form-control" id="rsvpName" placeholder="Nama Anda" required>
+                  <input type="text" class="form-control text-beige-dark" id="rsvpName" placeholder="Nama" required>
                 </div>
                 <div class="mb-3">
-                  <textarea name="rsvpMessage" id="rsvpMessageInput" class="form-control" rows="3" placeholder="Ucapan Anda"></textarea>
+                  <textarea name="rsvpMessage" id="rsvpMessageInput" class="form-control text-beige-dark" rows="3" placeholder="Ucapan Unik Mu"></textarea>
                 </div>
-                <div class="mb-3">
-                  <select class="form-select" id="rsvpAttending" required>
-                    <option value="">-- Konfirmasi Kehadiran --</option>
-                    <option value="yes">Ya, akan hadir</option>
-                    <option value="no">Tidak, maaf</option>
-                    <option value="maybe">Masih Ragu</option>
-                  </select>
-                </div>
+                <div id="rsvpMessage" class="mt-3"></div>
                 <div class="d-grid">
-                  <button type="submit" class="btn btn-light btn-lg">Kirim RSVP</button>
+                  <button type="submit" class="btn btn-sm btn-outline-dark text-white beige-border">Kirim Ucapan</button>
                 </div>
 
-                <div id="rsvpMessage" class="mt-3" style="display:none;"></div>
               </form>
             </div>
           </div>
         </div>
-
+        <hr>
         <!-- Gift / Transfer Info -->
         <div class="row justify-content-center mt-4">
           <div class="col-lg-8 text-center text-white">
@@ -318,7 +317,7 @@
     <!-- TESTIMONIAL / THANK YOU -->
     <section class="section-dark" data-aos="fade-up">
       <div class="container text-center">
-        <p class="text-beige">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kedua mempelai.</p>
+        <p class="text-beige">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kami.</p>
       </div>
     </section>
 
@@ -379,35 +378,42 @@
       e.preventDefault();
       const name = document.getElementById('rsvpName').value.trim();
       const message = document.getElementById('rsvpMessageInput').value;
-      const attending = document.getElementById('rsvpAttending').value;
       const msg = document.getElementById('rsvpMessage');
 
       // Simple UI feedback
       msg.style.display = 'block';
-      if(!name || !attending){
+      if(!name || !message){
         msg.textContent = 'Tolong lengkapi formulir.';
         msg.className = 'text-danger';
         return false;
       }
 
       msg.className = 'text-success';
-      msg.textContent = `Terima kasih ${name}! RSVP Anda telah diterima.`;
+      msg.textContent = `Terima kasih ${name}! Ucapan Anda telah diterima.`;
 
       // TODO: send to server via fetch POST
       // RSVP hanya bisa disimpan ke file JSON di backend/server.
       // Di sisi frontend (HTML/JS), Anda hanya bisa mengirim data ke backend API.
       // Contoh fetch POST ke backend yang menyimpan ke file JSON:
-      fetch('./rsvp.json', {
+      fetch('https://sistem.siptp.my.id/api/send-message', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, message, attending })
+        body: JSON.stringify({ name, message })
       })
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) throw new Error('Network response was not ok');
+        return res.json();
+      })
       .then(data => {
         // Optional: tampilkan pesan sukses dari server
-      })  
+        // jika server mengembalikan pesan, gunakan itu; jika tidak, biarkan pesan sebelumnya
+        if (data && data.message) {
+          msg.textContent = data.message;
+          setTimeout(loadMessages, 800); // refresh messages after a short delay
+        }
+      })
       .catch(err => {
-        msg.textContent = 'Gagal menyimpan RSVP.';
+        msg.textContent = 'Gagal mengirim ucapan.';
         msg.className = 'text-danger';
       });
 
@@ -415,6 +421,64 @@
       e.target.reset();
       return false;
     }
+
+    // Load messages from API and render
+    async function loadMessages() {
+      const list = document.getElementById('messagesList');
+      list.innerHTML = '<div class="text-beige-dark">Memuat...</div>';
+      try {
+      const res = await fetch('https://sistem.siptp.my.id/api/messages');
+      if (!res.ok) throw new Error('Network response was not ok');
+      let data = await res.json();
+      // handle different response shapes
+      if (data && data.data) data = data.data;
+      if (!Array.isArray(data)) data = Array.isArray(data.messages) ? data.messages : [];
+
+      if (data.length === 0) {
+        list.innerHTML = '<div class="text-beige-dark">Belum ada ucapan.</div>';
+        return;
+      }
+
+      list.innerHTML = data.map(item => {
+        const name = escapeHtml(item.name || item.nama || 'Tamu');
+        const msg = escapeHtml(item.message || item.ucapan || '');
+        const timeRaw = item.created_at || item.createdAt || item.date || item.timestamp || null;
+        const time = timeRaw ? new Date(timeRaw).toLocaleString() : '';
+        return `
+        <div class="rsvp-item list-group-item bg-transparent border-0 p-2">
+          <div class="d-flex">
+            <img src="data:image/svg+xml;utf8,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="45" height="45"><rect width="100%" height="100%" fill="#faf0e6"/><text x="50%" y="50%" dy=".35em" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="20" fill="#cda784">' + ((name).toString().trim().charAt(0).toUpperCase()) + '</text></svg>')}" alt="${name}" class="rounded-circle me-3" width="45" height="45">
+            <div class="flex-fill">
+              <div class="d-flex justify-content-between align-items-start">
+          <strong class="text-beige">${escapeHtml(((name).toString().replace(/([a-z])([A-Z])/g, '$1 $2').replace(/[_\-]+/g,' ').split(/\s+/).map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ')))}</strong>
+          <small class="text-beige text-time ms-2">${escapeHtml(time)}</small>
+              </div>
+              <p class="mb-0 text-beige">${msg}</p>
+            </div>
+          </div>
+        </div>
+        `;
+      }).join('');
+      } catch (err) {
+      list.innerHTML = '<div class="text-danger">Gagal memuat ucapan.</div>';
+      console.error(err);
+      }
+    }
+
+    // Basic HTML escape to avoid XSS
+    function escapeHtml(str) {
+      return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+    }
+
+    // Initialize and refresh after form submit
+    document.addEventListener('DOMContentLoaded', function() {
+      loadMessages();
+    });
   </script>
 </body>
 </html>
