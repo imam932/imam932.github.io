@@ -447,7 +447,7 @@
         return `
         <div class="rsvp-item list-group-item bg-transparent border-0 p-2">
           <div class="d-flex">
-            <img src="data:image/svg+xml;utf8,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="45" height="45"><rect width="100%" height="100%" fill="#faf0e6"/><text x="50%" y="50%" dy=".35em" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="20" fill="#cda784">' + ((name).toString().trim().charAt(0).toUpperCase()) + '</text></svg>')}" alt="${name}" class="rounded-circle me-3" width="45" height="45">
+            <img src="data:image/svg+xml;utf8,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="45" height="45"><rect width="100%" height="100%" fill="#faf0e6"/><text x="50%" y="50%" dy=".35em" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="18" fill="#cda784">' + (function(){ const p = (name||'').toString().trim().split(/\s+/); if(p.length>1){ return ((p[0].charAt(0)||'').toUpperCase() + (p[1].charAt(0)||'').toUpperCase()); } return ((p[0]||'').charAt(0)||'').toUpperCase(); })() + '</text></svg>')}" alt="${name}" class="rounded-circle me-3" width="45" height="45">
             <div class="flex-fill">
               <div class="d-flex justify-content-between align-items-start">
           <strong class="text-beige">${escapeHtml(((name).toString().replace(/([a-z])([A-Z])/g, '$1 $2').replace(/[_\-]+/g,' ').split(/\s+/).map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ')))}</strong>
