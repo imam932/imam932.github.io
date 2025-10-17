@@ -451,7 +451,7 @@
             <div class="flex-fill">
               <div class="d-flex justify-content-between align-items-start">
           <strong class="text-beige">${escapeHtml(((name).toString().replace(/([a-z])([A-Z])/g, '$1 $2').replace(/[_\-]+/g,' ').split(/\s+/).map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ')))}</strong>
-          <small class="text-beige text-time ms-2">${escapeHtml(time)}</small>
+          <small class="text-beige text-time ms-2">${escapeHtml(timeRaw)}</small>
               </div>
               <p class="mb-0 text-beige">${msg}</p>
             </div>
