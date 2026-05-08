@@ -1,0 +1,460 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Undangan Pernikahan — Zuniar & Lailil</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- AOS for simple scroll animations -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    :root{
+      --beige: #faf0e6;
+      --beige-dark: #cda784;
+      --gold: #D4AF37;
+      --black: #0b0b0b;
+      --muted: #555;
+      --container-width: 1040px;
+    }
+    html,body{
+      height:100%;
+      background: var(--beige);
+      font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+      color: var(--black);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    /* Global utilities */
+    .gold { color: var(--gold) !important; }
+    .gold-border { border-color: var(--gold) !important; }
+    .beige-border { border-color: var(--beige) !important; }
+
+    .text-beige { color: var(--beige) !important; }
+    .text-beige-dark { color: var(--beige-dark) !important; }
+
+    /* Header / Hero */
+    .hero{
+      min-height: 80vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      position:relative;
+      overflow:hidden;
+      background-color: #efeae0;
+    }
+    .hero .bg-photo{
+      position:absolute; inset:0; background-position:center; background-size:cover; filter:brightness(.45) contrast(.95);
+    }
+    .hero .hero-inner{
+      position:relative; z-index:2; text-align:center; color:var(--beige);
+      padding:4rem 1rem;
+      max-width:900px;
+    }
+    .couple-name{
+      font-family: 'Trajan Pro', serif;
+      font-size: clamp(2.5rem, 5vw, 4.2rem);
+      letter-spacing: 1px;
+      font-weight:700;
+    }
+    .mempelai{ font-size:1.25rem; font-weight:600; color:var(--gold); font-family: 'Trajan Pro', serif;}
+    .sub-heading{ font-size:1rem; color:var(--beige); margin-top:.5rem }
+
+    /* countdown */
+    .countdown .unit{ display:inline-block; min-width:70px; padding: .75rem; border-radius:8px; background: rgba(255,255,255,.06); border:1px solid rgba(0,0,0,.06); margin: .25rem; }
+    .countdown .value{ font-family: 'Playfair Display', serif; font-size:1.5rem; display:block }
+
+    /* Sections */
+    section{ padding:4rem 0; }
+    .section-light{ background: var(--beige); color:var(--black) }
+    .section-dark{ background: var(--beige-dark); color:#fff }
+    .section-dark-linear{ background: linear-gradient(180deg, var(--beige-dark), var(--beige)); color:#fff }
+    .section-dark-linear-revert{ background: linear-gradient(180deg, var(--beige), var(--beige-dark)); color:#fff }
+    .frame-photo{ border-radius:24px; overflow:hidden; border:3px solid rgba(212,175,55,.06); box-shadow:0 12px 30px rgba(0,0,0,.25); }
+
+    /* Cards */
+    .info-card{ background:rgba(255,255,255,.03); border:1px solid rgba(212,175,55,.12); padding:1.25rem; border-radius:12px; }
+
+    /* Gallery */
+    .gallery img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+    /* RSVP */
+    .rsvp-card{ background:var(--beige); border-radius:12px; padding:1.5rem; border:2px solid rgba(255,255,255,.06); }
+    .rsvp-item{ margin-bottom:1rem; background:var(--beige-dark) !important; border-radius: 12px; }
+    .text-time{ font-size:0.55rem; color:var(--beige); }
+    /* Footer */
+    footer{ padding:2.5rem 0; text-align:center; }
+    .guest-name{ font-size:1.5rem; font-weight:600; color:var(--gold); margin-top:.25rem; }
+    .quote{ font-style:italic; font-size:0.8rem; color:var(--muted); text-align: center; padding: 0.5rem 1rem; }
+    .btn-dark{ background: var(--beige-dark); color:var(--beige); border:none; }
+
+    @media (min-width:992px){
+      .hero{ min-height:84vh }
+    }
+  </style>
+</head>
+<body>
+  <!-- HERO -->
+  <header class="hero">
+    <div class="bg-photo" style="background-image: url('assets/img-zuniar/hero.jpg');"></div> <!-- Replace assets/hero.jpg with your hero image -->
+
+    <div class="hero-inner container text-center" data-aos="fade-up">
+      <div class="couple-name gold">ZUNIAR &amp; LAILIL</div>
+
+      <div class="mt-4 countdown d-inline-block" aria-label="Countdown to wedding">
+        <div class="unit text-center me-2">
+          <span class="value" id="days">00</span>
+          <small>Hari</small>
+        </div>
+        <div class="unit text-center me-2">
+          <span class="value" id="hours">00</span>
+          <small>Jam</small>
+        </div>
+        <div class="unit text-center me-2">
+          <span class="value" id="minutes">00</span>
+          <small>Menit</small>
+        </div>
+        <div class="unit text-center">
+          <span class="value" id="seconds">00</span>
+          <small>Detik</small>
+        </div>
+      </div>
+
+      <div class="mt-4">
+        <p class="sub-heading">Kepada yth :</p>
+        <p class="sub-heading">Bapak/Ibu/Saudara/i</p>
+        <h4 id="guest-name" class="guest-name"></h4>
+        <a class="btn btn-outline-dark gold-border text-white" id="btn-about" href="#about">Buka</a>
+        <script>
+          // Get guest name from URL parameter ?to=
+          function getGuestName() {
+            const params = new URLSearchParams(window.location.search);
+            return params.get('to') || 'Tamu Undangan';
+          }
+          document.getElementById('guest-name').textContent = getGuestName();
+        </script>
+      </div>
+
+    </div>
+  </header>
+
+  <main>
+    <!-- ABOUT -->
+    <section class="container section-light" id="about" data-aos="fade-up" data-aos-duration="200">
+      <div class="row align-items-center gy-4 pt-5 mt-2">
+        <!-- <div class="col-md-5 text-center">
+          <div class="frame-photo" style="max-width:380px;margin:0 auto;">
+            <img src="assets/img/bg/formal.webp" alt="Zuniar & Lailil" style="width:100%;display:block;">
+          </div>
+        </div> -->
+        <div class="col-md-12 text-center">
+          <!-- <h3 class="mb-3" style="font-family: 'Playfair Display', serif;">Our Story</h3> -->
+          <p class="quote text-beige-dark">Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya diantaramu rasa kasih dan sayang. Sesungguhnya pada yang demikian itu benar-benar terdapat tanda-tanda bagi kaum yang berfikir.</p>
+          <p class="quote text-beige-dark">(QS. Ar-Rum: 21)</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- EVENT -->
+    <section class="section-dark" data-aos="fade-up">
+      <div class="container">
+        <div class="row g-4 text-center">
+          <div class="col-md-6" data-aos="fade-right">
+            <div class="p-4">
+              <img src="assets/img-zuniar/male.png" alt="Mempelai Laki laki" class="frame-photo mb-3" style="width:220px;height:220px;object-fit:cover;">
+              <h5 class="text-beige mempelai">Achmad Zuniar Firmansyah, S.Psi</h5>
+              <p class="mb-1 text-beige">Putra Pertama dari Bapak ----- & Ibu ----- </p>
+            </div>
+              </div>
+              <div class="col-md-6" data-aos="fade-left">
+            <div class="p-4">
+              <img src="assets/img-zuniar/female.png" alt="Mempelai Pria" class="frame-photo mb-3" style="width:220px;height:220px;object-fit:cover;">
+              <h5 class="text-beige mempelai">Lailil Mazziyah</h5>
+              <p class="mb-1 text-beige">Putri Tunggal dari Bapak Ahmad & Ibu Nuriyah</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section data-aos="fade-up" class="section-light text-center">
+      <div class="container">
+        <div class="row justify-content-center text-center mb-4">
+          <div class="col-lg-8">
+            <h2 class="text-beige-dark" style="font-family:'Playfair Display', serif;">Acara Pernikahan</h2>
+            <p class="text-muted d-none">Bergabunglah dengan kami untuk akad yang khidmat dan resepsi yang penuh suka cita.</p>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-6" data-aos="fade-right">
+            <div class="p-2 info-card">
+              <h5 class="gold">Akad Nikah</h5>
+              <p class="mb-1 text-beige-dark">Rabu, 29 April 2026</p>
+              <p class="mb-1 text-beige-dark">-</p>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-left">
+            <div class="p-2 info-card">
+              <h5 class="gold">Resepsi</h5>
+              <p class="mb-1 text-beige-dark">Rabu, 3 Juni 2026</p>
+              <p class="mb-1 text-beige-dark">15:00 - Selesai</p>
+            </div>
+          </div>
+          <div class="col-md-6" data-aos="fade-left">
+            <div class="p-4 info-card">
+              <h5 class="gold">Pelaksanaan acara di kediaman mempelai laki-laki</h5>
+              <p class="mb-1 text-beige-dark">Gang Mushollah RT/RW 005/005 Dsn. Kalitengah Ds. Karangjati Kec. Pandaan Kab. Pasuruan, Jawa Timur</p>
+              <a class="btn btn-sm btn-dark mt-3" href="#map">Lihat Map</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- RSVP -->
+    <section id="rsvp" data-aos="fade-up" class="section-dark">
+      <div class="container">
+        <!-- <div class="row justify-content-center">
+          <div class="col-lg-6">
+            <div class="text-white">
+              <h4 class="mb-3 text-beige text-center">Wish for the couple</h4>
+
+                <div id="messagesContainer" class="mt-3"></div>
+                  <div id="messagesList" class="list-group mb-2 rsvp-card" style="max-height:400px; overflow:auto;">
+                    <div class="text-beige-dark">Memuat...</div>
+                  </div>
+                </div>
+
+              <form id="rsvpForm" class="mt-4" onsubmit="return handleRSVP(event)">
+                <div class="mb-3">
+                  <input type="text" class="form-control text-beige-dark" id="rsvpName" placeholder="Nama" required>
+                </div>
+                <div class="mb-3">
+                  <textarea name="rsvpMessage" id="rsvpMessageInput" class="form-control text-beige-dark" rows="3" placeholder="Ucapan Unik Mu"></textarea>
+                </div>
+                <div id="rsvpMessage" class="mt-3"></div>
+                <div class="d-grid">
+                  <button type="submit" class="btn btn-sm btn-outline-dark text-white beige-border">Kirim Ucapan</button>
+                </div>
+
+              </form>
+            </div>
+          </div>
+        </div> -->
+        <hr>
+        <!-- Gift / Transfer Info -->
+        <div class="row justify-content-center mt-4">
+          <div class="col-lg-8 text-center text-white">
+            <button type="button" class="btn btn-outline-dark text-white beige-border btn-lg" style="font-family:'Playfair Display', serif;" onclick="document.getElementById('giftInfo').classList.remove('d-none'); this.style.display='none';">Wedding Gift</button>
+          </div>
+          <div id="giftInfo" class="col-lg-8 text-center text-white d-none mt-4">
+            <h5 class="text-white">Gifts</h5>
+            <p class="text-beige">Doa restu Anda merupakan karunia yang sangat berarti bagi kami:</p>
+              <div class="mb-3">
+                <p class="mb-0 d-inline">Bank BCA — <span id="rekening">3151677213</span></p><br>
+                <strong>(Achmad Zuniar Firmansyah)</strong>
+                <br>
+                <button type="button" class="btn btn-sm btn-outline-dark text-white beige-border ms-2" onclick="copyRekening('rekening')">Salin</button>
+              </div>
+              
+            <script>
+              function copyRekening(id) {
+                const rekening = document.getElementById(id).textContent;
+                navigator.clipboard.writeText(rekening).then(function() {
+                  alert('Nomor rekening berhasil disalin!');
+              });
+              }
+            </script>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAP / LOCATION (simple placeholder) -->
+    <section id="map" class="container section-dark-linear" data-aos="fade-up">
+      <div class="row">
+        <div class="col-12 text-center mb-3">
+          <h4 style="font-family:'Playfair Display', serif;">Lokasi Acara</h4>
+        </div>
+        <div class="col-12">
+          <!-- Embed map here. Replace with actual map iframe -->
+          <div class="ratio ratio-16x9 frame-photo overflow-hidden">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d3954.173462486758!2d112.698156!3d-7.664492!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zN8KwMzknNTIuMiJTIDExMsKwNDEnNTMuNCJF!5e0!3m2!1sid!2sid!4v1778240502617!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIAL / THANK YOU -->
+    <section class="section-dark" data-aos="fade-up">
+      <div class="container text-center">
+        <p class="text-beige">Merupakan suatu kehormatan dan kebahagiaan bagi kami apabila Bapak/Ibu/Saudara/i berkenan hadir untuk memberikan doa restu kepada kami.</p>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="container">
+      <p class="small text-beige-dark text-center">&copy; 2026 Zuniar &amp; Lailil. Designed by <br> <a href="https://rawatweb.id/">Rawatweb</a></p>
+    </footer>
+
+  </main>
+
+  <!-- SCRIPTS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    window.addEventListener('DOMContentLoaded', function() {
+      var audio = document.createElement('audio');
+      audio.src = 'assets/music/Gunslinger.mp3';
+      audio.loop = true;
+      audio.style.display = 'none';
+      document.body.appendChild(audio);
+
+      // Create play button for user gesture
+      var playBtn = document.getElementById('btn-about');
+      playBtn.addEventListener('click', function() {
+        audio.play();
+        playBtn.style.display = 'none';
+      });
+    });
+
+    AOS.init({ duration:700, once:true });
+
+    // Countdown target date (update as needed)
+    const weddingDate = new Date('2026-06-03T15:00:00');
+
+    function updateCountdown(){
+      const now = new Date();
+      const diff = weddingDate - now;
+      if(diff <= 0){
+        document.getElementById('days').textContent = '00';
+        document.getElementById('hours').textContent = '00';
+        document.getElementById('minutes').textContent = '00';
+        document.getElementById('seconds').textContent = '00';
+        return;
+      }
+      const sec = Math.floor((diff/1000) % 60);
+      const min = Math.floor((diff/1000/60) % 60);
+      const hrs = Math.floor((diff/1000/60/60) % 24);
+      const days = Math.floor(diff/1000/60/60/24);
+      document.getElementById('days').textContent = String(days).padStart(2,'0');
+      document.getElementById('hours').textContent = String(hrs).padStart(2,'0');
+      document.getElementById('minutes').textContent = String(min).padStart(2,'0');
+      document.getElementById('seconds').textContent = String(sec).padStart(2,'0');
+    }
+    updateCountdown(); setInterval(updateCountdown,1000);
+
+    // Simple RSVP handler (replace with actual endpoint integration)
+    function handleRSVP(e){
+      e.preventDefault();
+      const name = document.getElementById('rsvpName').value.trim();
+      const message = document.getElementById('rsvpMessageInput').value;
+      const msg = document.getElementById('rsvpMessage');
+
+      // Simple UI feedback
+      msg.style.display = 'block';
+      if(!name || !message){
+        msg.textContent = 'Tolong lengkapi formulir.';
+        msg.className = 'text-danger';
+        return false;
+      }
+
+      msg.className = 'text-success';
+      msg.textContent = `Terima kasih ${name}! Ucapan Anda telah diterima.`;
+
+      // TODO: send to server via fetch POST
+      // RSVP hanya bisa disimpan ke file JSON di backend/server.
+      // Di sisi frontend (HTML/JS), Anda hanya bisa mengirim data ke backend API.
+      // Contoh fetch POST ke backend yang menyimpan ke file JSON:
+      fetch('https://sistem.siptp.my.id/api/send-message', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, message })
+      })
+      .then(res => {
+        if (!res.ok) throw new Error('Network response was not ok');
+        return res.json();
+      })
+      .then(data => {
+        // Optional: tampilkan pesan sukses dari server
+        // jika server mengembalikan pesan, gunakan itu; jika tidak, biarkan pesan sebelumnya
+        if (data && data.message) {
+          msg.textContent = data.message;
+          setTimeout(loadMessages, 800); // refresh messages after a short delay
+        }
+      })
+      .catch(err => {
+        msg.textContent = 'Gagal mengirim ucapan.';
+        msg.className = 'text-danger';
+      });
+
+      // reset form
+      e.target.reset();
+      return false;
+    }
+
+    // Load messages from API and render
+    async function loadMessages() {
+      const list = document.getElementById('messagesList');
+      list.innerHTML = '<div class="text-beige-dark">Memuat...</div>';
+      try {
+      const res = await fetch('https://sistem.siptp.my.id/api/messages');
+      if (!res.ok) throw new Error('Network response was not ok');
+      let data = await res.json();
+      // handle different response shapes
+      if (data && data.data) data = data.data;
+      if (!Array.isArray(data)) data = Array.isArray(data.messages) ? data.messages : [];
+
+      if (data.length === 0) {
+        list.innerHTML = '<div class="text-beige-dark">Belum ada ucapan.</div>';
+        return;
+      }
+
+      list.innerHTML = data.map(item => {
+        const name = escapeHtml(item.name || item.nama || 'Tamu');
+        const msg = escapeHtml(item.message || item.ucapan || '');
+        const timeRaw = item.created_at || item.createdAt || item.date || item.timestamp || null;
+        const time = timeRaw ? new Date(timeRaw).toLocaleString() : '';
+        return `
+        <div class="rsvp-item list-group-item bg-transparent border-0 p-2">
+          <div class="d-flex">
+            <img src="data:image/svg+xml;utf8,${encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="45" height="45"><rect width="100%" height="100%" fill="#faf0e6"/><text x="50%" y="50%" dy=".35em" text-anchor="middle" font-family="Poppins, Arial, sans-serif" font-size="18" fill="#cda784">' + (function(){ const p = (name||'').toString().trim().split(/\s+/); if(p.length>1){ return ((p[0].charAt(0)||'').toUpperCase() + (p[1].charAt(0)||'').toUpperCase()); } return ((p[0]||'').charAt(0)||'').toUpperCase(); })() + '</text></svg>')}" alt="${name}" class="rounded-circle me-3" width="45" height="45">
+            <div class="flex-fill">
+              <div class="d-flex justify-content-between align-items-start">
+          <strong class="text-beige">${escapeHtml(((name).toString().replace(/([a-z])([A-Z])/g, '$1 $2').replace(/[_\-]+/g,' ').split(/\s+/).map(w => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()).join(' ')))}</strong>
+          <small class="text-beige text-time ms-2">${escapeHtml(timeRaw)}</small>
+              </div>
+              <p class="mb-0 text-beige">${msg}</p>
+            </div>
+          </div>
+        </div>
+        `;
+      }).join('');
+      } catch (err) {
+      list.innerHTML = '<div class="text-danger">Gagal memuat ucapan.</div>';
+      console.error(err);
+      }
+    }
+
+    // Basic HTML escape to avoid XSS
+    function escapeHtml(str) {
+      return String(str)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+    }
+
+    // Initialize and refresh after form submit
+    document.addEventListener('DOMContentLoaded', function() {
+      loadMessages();
+    });
+  </script>
+</body>
+</html>
