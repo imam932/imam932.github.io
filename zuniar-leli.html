@@ -14,20 +14,34 @@
 
   <style>
     :root{
-      --beige: #faf0e6;
-      --beige-dark: #cda784;
-      --gold: #D4AF37;
-      --black: #0b0b0b;
-      --muted: #555;
+      --beige: #f3e8d4;
+      --beige-dark: #cba66d;
+      --gold: #f1cc84;
+      --black: #f4f6fb;
+      --muted: #9aa4b2;
+      --surface: #1a1f2b;
+      --surface-soft: #1e2431;
+      --surface-deep: #141923;
+      --border-soft: rgba(255,255,255,.08);
+      --shadow-soft: 10px 10px 22px rgba(5,7,12,.62), -8px -8px 22px rgba(36,45,61,.45);
+      --shadow-inset: inset 1px 1px 0 rgba(255,255,255,.05), inset -1px -1px 0 rgba(0,0,0,.35);
       --container-width: 1040px;
     }
     html,body{
       height:100%;
-      background: var(--beige);
+      background: radial-gradient(circle at 15% 15%, #242d3d 0%, #151a24 40%, #10141c 100%);
       font-family: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
       color: var(--black);
       -webkit-font-smoothing:antialiased;
       -moz-osx-font-smoothing:grayscale;
+    }
+    body::before{
+      content:'';
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      background: radial-gradient(circle at 82% 20%, rgba(241,204,132,.1), transparent 36%), radial-gradient(circle at 15% 70%, rgba(118,136,173,.12), transparent 42%);
+      z-index:-1;
     }
 
     /* Global utilities */
@@ -36,7 +50,7 @@
     .beige-border { border-color: var(--beige) !important; }
 
     .text-beige { color: var(--beige) !important; }
-    .text-beige-dark { color: var(--beige-dark) !important; }
+    .text-beige-dark { color: #d5b07a !important; }
 
     /* Header / Hero */
     .hero{
@@ -46,15 +60,20 @@
       justify-content:center;
       position:relative;
       overflow:hidden;
-      background-color: #efeae0;
+      background-color: #0f141d;
     }
     .hero .bg-photo{
-      position:absolute; inset:0; background-position:center; background-size:cover; filter:brightness(.45) contrast(.95);
+      position:absolute; inset:0; background-position:center; background-size:cover; filter:brightness(.35) contrast(1.05) saturate(.82);
     }
     .hero .hero-inner{
       position:relative; z-index:2; text-align:center; color:var(--beige);
       padding:4rem 1rem;
       max-width:900px;
+      background: rgba(19,25,35,.55);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 28px;
+      backdrop-filter: blur(8px);
+      box-shadow: var(--shadow-soft);
     }
     .couple-name{
       font-family: 'Trajan Pro', serif;
@@ -66,32 +85,50 @@
     .sub-heading{ font-size:1rem; color:var(--beige); margin-top:.5rem }
 
     /* countdown */
-    .countdown .unit{ display:inline-block; min-width:70px; padding: .75rem; border-radius:8px; background: rgba(255,255,255,.06); border:1px solid rgba(0,0,0,.06); margin: .25rem; }
+    .countdown .unit{ display:inline-block; min-width:70px; padding: .75rem; border-radius:14px; background: var(--surface-soft); border:1px solid var(--border-soft); margin: .25rem; box-shadow: var(--shadow-soft), var(--shadow-inset); }
     .countdown .value{ font-family: 'Playfair Display', serif; font-size:1.5rem; display:block }
 
     /* Sections */
     section{ padding:4rem 0; }
-    .section-light{ background: var(--beige); color:var(--black) }
-    .section-dark{ background: var(--beige-dark); color:#fff }
-    .section-dark-linear{ background: linear-gradient(180deg, var(--beige-dark), var(--beige)); color:#fff }
-    .section-dark-linear-revert{ background: linear-gradient(180deg, var(--beige), var(--beige-dark)); color:#fff }
-    .frame-photo{ border-radius:24px; overflow:hidden; border:3px solid rgba(212,175,55,.06); box-shadow:0 12px 30px rgba(0,0,0,.25); }
+    .section-light{ background: transparent; color:var(--black) }
+    .section-dark{ background: linear-gradient(180deg, rgba(31,38,52,.9), rgba(22,27,37,.95)); color:#f5f7fb }
+    .section-dark-linear{ background: linear-gradient(180deg, rgba(27,33,45,.95), rgba(16,21,30,.95)); color:#f5f7fb }
+    .section-dark-linear-revert{ background: linear-gradient(180deg, rgba(16,21,30,.95), rgba(27,33,45,.95)); color:#f5f7fb }
+    .frame-photo{ border-radius:24px; overflow:hidden; border:1px solid rgba(241,204,132,.22); box-shadow: 0 16px 34px rgba(0,0,0,.45); }
 
     /* Cards */
-    .info-card{ background:rgba(255,255,255,.03); border:1px solid rgba(212,175,55,.12); padding:1.25rem; border-radius:12px; }
+    .info-card{ background: var(--surface); border:1px solid var(--border-soft); padding:1.25rem; border-radius:18px; box-shadow: var(--shadow-soft), var(--shadow-inset); }
 
     /* Gallery */
     .gallery img{ width:100%; height:100%; object-fit:cover; display:block; }
 
     /* RSVP */
-    .rsvp-card{ background:var(--beige); border-radius:12px; padding:1.5rem; border:2px solid rgba(255,255,255,.06); }
-    .rsvp-item{ margin-bottom:1rem; background:var(--beige-dark) !important; border-radius: 12px; }
-    .text-time{ font-size:0.55rem; color:var(--beige); }
+    .rsvp-card{ background:var(--surface); border-radius:16px; padding:1.5rem; border:1px solid var(--border-soft); box-shadow: var(--shadow-soft); }
+    .rsvp-item{ margin-bottom:1rem; background:var(--surface-soft) !important; border-radius: 12px; border:1px solid var(--border-soft); }
+    .text-time{ font-size:0.55rem; color:#b9c3d2; }
     /* Footer */
     footer{ padding:2.5rem 0; text-align:center; }
     .guest-name{ font-size:1.5rem; font-weight:600; color:var(--gold); margin-top:.25rem; }
-    .quote{ font-style:italic; font-size:0.8rem; color:var(--muted); text-align: center; padding: 0.5rem 1rem; }
-    .btn-dark{ background: var(--beige-dark); color:var(--beige); border:none; }
+    .quote{ font-style:italic; font-size:0.8rem; color:#ced6e3; text-align: center; padding: 0.5rem 1rem; }
+    .btn-dark{ background: #263247; color:#eff3fb; border:1px solid rgba(255,255,255,.08); box-shadow: var(--shadow-soft); }
+    .btn-dark:hover{ background:#2d3a52; color:#fff; border-color:rgba(255,255,255,.14); }
+    .btn-outline-dark{
+      color:#f5d9a7;
+      border-color:rgba(241,204,132,.55);
+      background: rgba(16,21,30,.56);
+      box-shadow: var(--shadow-soft), var(--shadow-inset);
+    }
+    .btn-outline-dark:hover,
+    .btn-outline-dark:focus{
+      color:#1a1f2b;
+      background:#f1cc84;
+      border-color:#f1cc84;
+    }
+    .text-muted{ color:#9ca8bb !important; }
+    hr{ border-color:rgba(255,255,255,.16); opacity:.7; }
+    iframe{ filter: grayscale(.12) saturate(.75) contrast(.95) brightness(.9); }
+    footer a{ color:#f1cc84; text-decoration:none; }
+    footer a:hover{ color:#ffe0aa; text-decoration:underline; }
 
     @media (min-width:992px){
       .hero{ min-height:84vh }
@@ -168,14 +205,14 @@
             <div class="p-4">
               <img src="assets/img-zuniar/male.png" alt="Mempelai Laki laki" class="frame-photo mb-3" style="width:220px;height:220px;object-fit:cover;">
               <h5 class="text-beige mempelai">Achmad Zuniar Firmansyah, S.Psi</h5>
-              <p class="mb-1 text-beige">Putra Pertama dari Bapak ----- & Ibu ----- </p>
+              <p class="mb-1 text-beige">Putra Pertama dari Bapak Suryadi & Ibu Supri Hatiningsih </p>
             </div>
               </div>
               <div class="col-md-6" data-aos="fade-left">
             <div class="p-4">
               <img src="assets/img-zuniar/female.png" alt="Mempelai Pria" class="frame-photo mb-3" style="width:220px;height:220px;object-fit:cover;">
               <h5 class="text-beige mempelai">Lailil Mazziyah</h5>
-              <p class="mb-1 text-beige">Putri Tunggal dari Bapak Ahmad & Ibu Nuriyah</p>
+              <p class="mb-1 text-beige">Putri Pertama dari Bapak M. Thoyyib & Ibu Amirotul Mahmudah</p>
             </div>
           </div>
         </div>
@@ -194,7 +231,7 @@
           <div class="col-md-6" data-aos="fade-right">
             <div class="p-2 info-card">
               <h5 class="gold">Akad Nikah</h5>
-              <p class="mb-1 text-beige-dark">Rabu, 29 April 2026</p>
+              <p class="mb-1 text-beige-dark">Rabu, 29 Mei 2026</p>
               <p class="mb-1 text-beige-dark">-</p>
             </div>
           </div>
